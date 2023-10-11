@@ -1,12 +1,14 @@
 import express from 'express'
 import payload from 'payload'
+import path from 'path'
 
 // eslint-disable-next-line
-require('dotenv').config()
+require("dotenv").config({ path: path.resolve(__dirname, './.env')})
 
 import { seed } from './seed'
 
 const app = express()
+console.log(process.env.PAYLOAD_SECRET);
 
 // Redirect root to Admin panel
 app.get('/', (_, res) => {
@@ -15,8 +17,8 @@ app.get('/', (_, res) => {
 
 const start = async (): Promise<void> => {
   await payload.init({
-    secret: '452961a85191fafd90b805f4',
-    mongoURL: 'mongodb+srv://faster-steam:G7jCgilBCO7neRPe@cluster0.uxtd9ou.mongodb.net/',
+    secret: process.env.PAYLOAD_SECRET,
+    mongoURL: process.env.MONGODB_URI,
     express: app,
     onInit: () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
