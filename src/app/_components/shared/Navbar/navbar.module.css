@@ -1,0 +1,16 @@
+.navbar {
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.navbar ul a {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color);
+}
+
+.navbar ul a li {
+  list-style: none;
+}
