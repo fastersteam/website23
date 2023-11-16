@@ -1,6 +1,6 @@
 import { Navbar } from "./_components/shared/Navbar";
 import "./global.css";
-import "./normalize.css";
+import "./reset.css";
 
 export const metadata = {
   title: "Next.js",

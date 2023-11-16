@@ -1,6 +1,7 @@
 :root {
   --bg-color: #18181b;
   --color: #ffffff;
+  --accent-color: #7acec2;
   --base-font-size: 30px;
 }
 
@@ -9,4 +10,18 @@ body {
   color: var(--color);
   background-color: var(--bg-color);
   font-size: var(--base-font-size);
+}
+
+a {
+  color: var(--color);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+ul li {
+  list-style: none;
 }
