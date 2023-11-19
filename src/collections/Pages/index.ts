@@ -1,25 +1,28 @@
-import type { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from "payload/types";
 
-import { admins } from '../../access/admins'
-import { adminsOrPublished } from '../../access/adminsOrPublished'
-import { Archive } from '../../blocks/Archive'
-import { CallToAction } from '../../blocks/CallToAction'
-import { Content } from '../../blocks/Content'
-import { FormBlock } from '../../blocks/Form'
-import { MediaBlock } from '../../blocks/Media'
-import { hero } from '../../fields/hero'
-import { slugField } from '../../fields/slug'
-import { populateArchiveBlock } from '../../hooks/populateArchiveBlock'
-import { populatePublishedDate } from '../../hooks/populatePublishedDate'
-import { formatAppURL, revalidatePage } from '../../hooks/revalidatePage'
+import { admins } from "../../access/admins";
+import { adminsOrPublished } from "../../access/adminsOrPublished";
+import { Archive } from "../../blocks/Archive";
+import { CallToAction } from "../../blocks/CallToAction";
+import { Content } from "../../blocks/Content";
+import { FormBlock } from "../../blocks/Form";
+import { MediaBlock } from "../../blocks/Media";
+import { hero } from "../../fields/hero";
+import { slugField } from "../../fields/slug";
+import { populateArchiveBlock } from "../../hooks/populateArchiveBlock";
+import { populatePublishedDate } from "../../hooks/populatePublishedDate";
+import { formatAppURL, revalidatePage } from "../../hooks/revalidatePage";
+import { HeroWithContent } from "../../blocks/HeroWithContent";
 
 export const Pages: CollectionConfig = {
-  slug: 'pages',
+  slug: "pages",
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'updatedAt'],
-    preview: doc =>
-      `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL({ doc })}`,
+    useAsTitle: "title",
+    defaultColumns: ["title", "slug", "updatedAt"],
+    preview: (doc) =>
+      `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL({
+        doc,
+      })}`,
   },
   hooks: {
     beforeChange: [populatePublishedDate],
@@ -37,32 +40,39 @@ export const Pages: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
+      name: "title",
+      type: "text",
       required: true,
     },
     {
-      name: 'publishedDate',
-      type: 'date',
+      name: "publishedDate",
+      type: "date",
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     },
     {
-      type: 'tabs',
+      type: "tabs",
       tabs: [
+        // {
+        //   label: "Hero",
+        //   fields: [hero],
+        // },
         {
-          label: 'Hero',
-          fields: [hero],
-        },
-        {
-          label: 'Content',
+          label: "Content",
           fields: [
             {
-              name: 'layout',
-              type: 'blocks',
+              name: "layout",
+              type: "blocks",
               required: true,
-              blocks: [CallToAction, Content, FormBlock, MediaBlock, Archive],
+              blocks: [
+                CallToAction,
+                Content,
+                FormBlock,
+                MediaBlock,
+                Archive,
+                HeroWithContent,
+              ],
             },
           ],
         },
@@ -70,4 +80,4 @@ export const Pages: CollectionConfig = {
     },
     slugField(),
   ],
-}
+};
